@@ -95,9 +95,22 @@
             <artifactId>maven-plugin-api</artifactId>
             <version>${version.org.apache.maven.plugin-api}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-project</artifactId>
+            <version>${version.org.apache.maven.maven-plugin}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-repository-metadata</artifactId>
+            <version>${version.org.apache.maven.maven-plugin}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
             <version>${version.org.apache.maven.maven-plugin}</version>
         </dependency>
 
