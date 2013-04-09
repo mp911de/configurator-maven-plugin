@@ -8,7 +8,6 @@ Internal
 level, Jar = 1, War = 2, Ear = 3)
 5. parse property files
 6. perform injection of values (read file.template.xml, replace values, store to file.xml)
-7. store processed output in target/configurator/work
 8. reassemble outputfile into target/configurator
 9. copy outputfile to sourcefilename-configured.packagingtype
 

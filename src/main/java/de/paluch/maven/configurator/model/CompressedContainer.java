@@ -19,4 +19,14 @@ public class CompressedContainer extends Container {
     public void setPackagingType(PackagingType packagingType) {
         this.packagingType = packagingType;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [name=").append(getName());
+        sb.append(", packagingType=").append(packagingType);
+        sb.append(']');
+        return sb.toString();
+    }
 }

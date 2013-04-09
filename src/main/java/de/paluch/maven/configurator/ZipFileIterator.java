@@ -1,15 +1,15 @@
 package de.paluch.maven.configurator;
 
+import de.paluch.maven.configurator.model.CompressedContainer;
 import de.paluch.maven.configurator.model.Container;
+import de.paluch.maven.configurator.model.Entry;
 import de.paluch.maven.configurator.model.PackagingType;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.io.RawInputStreamFacade;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -29,7 +29,7 @@ public class ZipFileIterator {
         this.extractionBase = extractionBase;
     }
 
-    public void iterate() throws IOException {
+    public void extract() throws IOException {
 
 
         ZipEntry entry;
@@ -49,14 +49,18 @@ public class ZipFileIterator {
                 if (isPackagedFile(entry)) {
                     extractTarget.mkdirs();
                     ZipInputStream childZipStream = new ZipInputStream(lis);
-                    Container childContainer = new Container(entry.getName());
+                    CompressedContainer childContainer = new CompressedContainer(entry.getName());
+                    childContainer.setPackagingType(getPackagingType(entry));
                     container.getEntries().add(childContainer);
-                    new ZipFileIterator(childContainer, childZipStream, extractTarget).iterate();
+                    new ZipFileIterator(childContainer, childZipStream, extractTarget).extract();
                     continue;
                 }
 
                 FileUtils.copyStreamToFile(new RawInputStreamFacade(lis), extractTarget);
+                extractTarget.setLastModified(entry.getTime());
                 zis.closeEntry();
+
+                container.getEntries().add(new Entry(entry.getName()));
             }
         }
 

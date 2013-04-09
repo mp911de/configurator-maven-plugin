@@ -20,4 +20,13 @@ public class Entry {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [name='").append(name).append('\'');
+        sb.append(']');
+        return sb.toString();
+    }
 }
