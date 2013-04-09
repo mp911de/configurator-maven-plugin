@@ -85,3 +85,6 @@ Goals
 * **configurator:configure** configures the build file from your current project
 * **configurator:configure-artifact** configures an arbitrary, external artifact.
 
+
+# License
+* [MIT License](http://www.opensource.org/licenses/mit-license.php)
