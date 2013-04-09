@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  * @since 08.04.13 13:00
  */
-public class ZipFileIteratorTest {
+public class ZipFileIteratorAndExtractorTest {
 
     @Test
     public void testExtract() throws Exception {
@@ -23,11 +23,11 @@ public class ZipFileIteratorTest {
 
         Container container = new Container("simple.war");
 
-        File file = new File(baseDir + "/target/test/" + ZipFileIterator.class.getSimpleName());
+        File file = new File(baseDir + "/target/test/" + ZipFileIteratorAndExtractor.class.getSimpleName());
         FileUtils.deleteDirectory(file);
         file.mkdirs();
 
-        ZipFileIterator zi = new ZipFileIterator(container, new ZipInputStream(getClass().getResourceAsStream("/simple.war")), file);
+        ZipFileIteratorAndExtractor zi = new ZipFileIteratorAndExtractor(container, new ZipInputStream(getClass().getResourceAsStream("/simple.war")), file);
         zi.extract();
 
         assertEquals(5, container.getEntries().size());

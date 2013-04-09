@@ -3,7 +3,6 @@ package de.paluch.maven.configurator;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.resolver.ArtifactResolver;
-import org.apache.maven.model.Build;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.ReflectionUtils;
@@ -55,15 +54,12 @@ public class ConfigureArtifactMojoIT extends AbstractMojoTestCase {
         when(artifact.getFile()).thenReturn(artifactFile);
 
         ConfigureArtifactMojo mojo = (ConfigureArtifactMojo) super.lookupMojo("configure-artifact", pluginConfig);
-
-
         MavenProject project = new MavenProject();
-        project.setBuild(new Build());
-        project.getProperties().setProperty("value", "the value for key value");
-        project.getBuild().setDirectory(new File(super.getBasedir(), "target").toString());
+        project.getProperties().setProperty("value", "the value");
 
         ReflectionUtils.setVariableValueInObject(mojo, "factory", factory);
         ReflectionUtils.setVariableValueInObject(mojo, "artifactResolver", artifactResolver);
+        ReflectionUtils.setVariableValueInObject(mojo, "targetDir", new File(super.getBasedir() + "/target/"));
         ReflectionUtils.setVariableValueInObject(mojo, "project", project);
 
         mojo.execute();

@@ -27,15 +27,13 @@ public class ZipFileIteratorAndCompressorTest {
         FileUtils.deleteDirectory(file);
         file.mkdirs();
 
-        ZipFileIterator zi = new ZipFileIterator(container, new ZipInputStream(getClass().getResourceAsStream("/simple.war")), file);
+        ZipFileIteratorAndExtractor zi = new ZipFileIteratorAndExtractor(container, new ZipInputStream(getClass().getResourceAsStream("/simple.war")), file);
         zi.extract();
 
 
         File target = new File(baseDir + "/target/test/" + ZipFileIteratorAndCompressorTest.class.getSimpleName() + ".zip");
 
         ZipFileCompressor compressor = new ZipFileCompressor(container, new ZipOutputStream(new FileOutputStream(target)), file);
-        compressor.compress("");
-
+        compressor.compress();
     }
-
 }

@@ -13,24 +13,28 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
+ * Extracts an Zip-File (recursively)
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  * @since 08.04.13 11:44
  */
-public class ZipFileIterator {
+public class ZipFileIteratorAndExtractor {
 
     private Container container;
     private ZipInputStream zis;
     private File extractionBase;
 
 
-    public ZipFileIterator(Container container, ZipInputStream zis, File extractionBase) {
+    public ZipFileIteratorAndExtractor(Container container, ZipInputStream zis, File extractionBase) {
         this.container = container;
         this.zis = zis;
         this.extractionBase = extractionBase;
     }
 
+    /**
+     * Perform extraction and build container model.
+     * @throws IOException
+     */
     public void extract() throws IOException {
-
 
         ZipEntry entry;
         while ((entry = zis.getNextEntry()) != null) {
@@ -43,16 +47,10 @@ public class ZipFileIterator {
                     continue;
                 }
 
-
-                LimitedInputStream lis = new LimitedInputStream(entry.getSize(), zis);
+                LimitedNonClosingInputStream lis = new LimitedNonClosingInputStream(entry.getSize(), zis);
 
                 if (isPackagedFile(entry)) {
-                    extractTarget.mkdirs();
-                    ZipInputStream childZipStream = new ZipInputStream(lis);
-                    CompressedContainer childContainer = new CompressedContainer(entry.getName());
-                    childContainer.setPackagingType(getPackagingType(entry));
-                    container.getEntries().add(childContainer);
-                    new ZipFileIterator(childContainer, childZipStream, extractTarget).extract();
+                    extract(entry, extractTarget, lis);
                     continue;
                 }
 
@@ -67,11 +65,28 @@ public class ZipFileIterator {
         zis.close();
     }
 
+    /**
+     * Extract a child-entry.
+     * @param entry
+     * @param extractTarget
+     * @param lis
+     * @throws IOException
+     */
+    private void extract(ZipEntry entry, File extractTarget, LimitedNonClosingInputStream lis) throws IOException {
+        extractTarget.mkdirs();
+
+        ZipInputStream childZipStream = new ZipInputStream(lis);
+        CompressedContainer childContainer = new CompressedContainer(entry.getName());
+        childContainer.setPackagingType(getPackagingType(entry));
+        container.getEntries().add(childContainer);
+
+        new ZipFileIteratorAndExtractor(childContainer, childZipStream, extractTarget).extract();
+    }
+
     private boolean isPackagedFile(ZipEntry entry) {
         if (getPackagingType(entry) != null) {
             return true;
         }
-
         return false;
     }
 

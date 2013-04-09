@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * Limited and Non-Closing InputStream.
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  * @since 08.04.13 12:43
  */
-public class LimitedInputStream extends InputStream {
+public class LimitedNonClosingInputStream extends InputStream {
 
     private long position = 0;
     private long limit = 0;
 
     private InputStream parent;
 
-    public LimitedInputStream(long limit, InputStream parent) {
+    public LimitedNonClosingInputStream(long limit, InputStream parent) {
         this.limit = limit;
         this.parent = parent;
     }
