@@ -9,21 +9,27 @@ Example:
 
 Template-File **config.template.properties**
 
-```username=@db.username@
-url=@db.url@```
+```
+username=@db.username@
+url=@db.url@
+```
 
 
 Properties-File **production.properties**
 
-```db.username=mark
-db.url=jdbc:mysql://...```
+```
+db.username=mark
+db.url=jdbc:mysql://...
+```
 
 will become then
 
 **config.properties**
 
-```username=mark
-url=jdbc:mysql://...```
+```
+username=mark
+url=jdbc:mysql://...
+```
 
 This method is intended primarily for Java Web Applications and Java Enterprise Applications which are packaged as WAR
 or EAR file. As soon as you start packaging and deploying (artifact repository) environment-configured artifacts, the are
