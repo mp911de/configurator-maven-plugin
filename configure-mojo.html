@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20130409" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Configurator Maven Plugin - </title>
+    <title>Configurator Maven Plugin - 
+    configurator:configure</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -68,10 +69,12 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Overview</li>
                                 
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Introduction</a>
-          </li>
+                          <a href="index.html" title="Introduction">
+          <i class="none"></i>
+        Introduction</a>
+            </li>
                   
       <li>
     
@@ -124,104 +127,13 @@
         JavaDoc</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                          
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>About</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="team-list.html" title="Project Team">
-          <i class="none"></i>
-        Project Team</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="integration.html" title="Continuous Integration">
-          <i class="none"></i>
-        Continuous Integration</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="issue-tracking.html" title="Issue Tracking">
-          <i class="none"></i>
-        Issue Tracking</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="mail-lists.html" title="Mailing Lists">
-          <i class="none"></i>
-        Mailing Lists</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependencies.html" title="Dependencies">
-          <i class="none"></i>
-        Dependencies</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
                                                                                                         
       <li>
     
@@ -271,11 +183,86 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Introduction</h1><p>JAR Configurator Maven-Plugin (configurator-maven-plugin)</p><p>The configurator-maven-plugin is used to configure a JAR, WAR or EAR file after the build with properties.</p><div class="section"><h2>Goals Overview<a name="Goals_Overview"></a></h2><p>General information about the goals.</p>
-<ul>
-  <li><p><a href="./configure-mojo.html">configurator:configure</a> configure the target file of the current project.</p></li>
-  <li><p><a href="./configure-artifact-mojo.html">configurator:configure-artifact</a> configure an arbitrary artifact.</p></li>
-</ul><p><a class="externalLink" href="https://github.com/mp911de/configurator-maven-plugin/zipball/master">Download ZIP File</a>  <a class="externalLink" href="https://github.com/mp911de/configurator-maven-plugin/tarball/master">Download TAR Ball</a></p></div>
+            
+  
+    <div class="section"><h2>configurator:configure<a name="configurator:configure"></a></h2>
+      <p><b>Full name</b>:</p>
+      <p>de.paluch.maven.configurator:configurator-maven-plugin:1.0-SNAPSHOT:configure</p>
+      <p><b>Description</b>:</p>
+      <div>Perform configuration for the project artifact.</div>
+      <p><b>Attributes</b>:</p>
+      <ul>
+        <li>Requires a Maven project to be executed.</li>
+        <li>Binds by default to the <a class="externalLink" href="http://maven.apache.org/ref/current/maven-core/lifecycles.html">lifecycle phase</a>: <tt>package</tt>.</li>
+        <li>Invokes the execution of the <a class="externalLink" href="http://maven.apache.org/ref/current/maven-core/lifecycles.html">lifecycle phase</a> <tt>package</tt> prior to executing itself.</li>
+      </ul>
+      <div class="section"><h3>Optional Parameters<a name="Optional_Parameters"></a></h3>
+        <table class="table table-striped" border="0">
+          <tr class="a">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Since</th>
+            <th>Description</th>
+          </tr>
+          <tr class="b">
+            <td><b><a href="#propertySources">propertySources</a></b></td>
+            <td><tt>List</tt></td>
+            <td><tt>-</tt></td>
+            <td>Property-Source, optional List of File-Names or URL's or property
+files.<br /></td>
+          </tr>
+          <tr class="a">
+            <td><b><a href="#targetDir">targetDir</a></b></td>
+            <td><tt>File</tt></td>
+            <td><tt>-</tt></td>
+            <td>The target directory the application to be deployed is located.<br /><b>Default value is</b>: <tt>${project.build.directory}/</tt>.<br /></td>
+          </tr>
+          <tr class="b">
+            <td><b><a href="#tokenEnd">tokenEnd</a></b></td>
+            <td><tt>String</tt></td>
+            <td><tt>-</tt></td>
+            <td>Token end for identifying the end of the variable declaration. Can
+be something like @ or }.<br /></td>
+          </tr>
+          <tr class="a">
+            <td><b><a href="#tokenStart">tokenStart</a></b></td>
+            <td><tt>String</tt></td>
+            <td><tt>-</tt></td>
+            <td>Token start for identifying the start of the variable declaration.
+Can be something like @ or ${.<br /></td>
+          </tr>
+        </table>
+      </div>
+      <div class="section"><h3>Parameter Details<a name="Parameter_Details"></a></h3>
+        <p><b><a name="propertySources">propertySources</a>:</b></p>
+        <div>Property-Source, optional List of File-Names or URL's or property
+files.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.util.List</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+        </ul><hr /><p><b><a name="targetDir">targetDir</a>:</b></p>
+        <div>The target directory the application to be deployed is located.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.io.File</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+          <li><b>Default</b>: <tt>${project.build.directory}/</tt></li>
+        </ul><hr /><p><b><a name="tokenEnd">tokenEnd</a>:</b></p>
+        <div>Token end for identifying the end of the variable declaration. Can
+be something like @ or }.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+        </ul><hr /><p><b><a name="tokenStart">tokenStart</a>:</b></p>
+        <div>Token start for identifying the start of the variable declaration.
+Can be something like @ or ${.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+        </ul>
+      </div>
+    </div>
+  
+
                   </div>
             </div>
           </div>

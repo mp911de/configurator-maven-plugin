@@ -68,10 +68,12 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Overview</li>
                                 
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Introduction</a>
-          </li>
+                          <a href="index.html" title="Introduction">
+          <i class="none"></i>
+        Introduction</a>
+            </li>
                   
       <li>
     
@@ -80,12 +82,10 @@
         Goals</a>
             </li>
                   
-      <li>
+      <li class="active">
     
-                          <a href="usage.html" title="Usage">
-          <i class="none"></i>
-        Usage</a>
-            </li>
+            <a href="#"><i class="none"></i>Usage</a>
+          </li>
                   
       <li>
     
@@ -124,104 +124,13 @@
         JavaDoc</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                          
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>About</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="team-list.html" title="Project Team">
-          <i class="none"></i>
-        Project Team</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="integration.html" title="Continuous Integration">
-          <i class="none"></i>
-        Continuous Integration</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="issue-tracking.html" title="Issue Tracking">
-          <i class="none"></i>
-        Issue Tracking</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="mail-lists.html" title="Mailing Lists">
-          <i class="none"></i>
-        Mailing Lists</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependencies.html" title="Dependencies">
-          <i class="none"></i>
-        Dependencies</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
                                                                                                         
       <li>
     
@@ -271,11 +180,16 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Introduction</h1><p>JAR Configurator Maven-Plugin (configurator-maven-plugin)</p><p>The configurator-maven-plugin is used to configure a JAR, WAR or EAR file after the build with properties.</p><div class="section"><h2>Goals Overview<a name="Goals_Overview"></a></h2><p>General information about the goals.</p>
-<ul>
-  <li><p><a href="./configure-mojo.html">configurator:configure</a> configure the target file of the current project.</p></li>
-  <li><p><a href="./configure-artifact-mojo.html">configurator:configure-artifact</a> configure an arbitrary artifact.</p></li>
-</ul><p><a class="externalLink" href="https://github.com/mp911de/configurator-maven-plugin/zipball/master">Download ZIP File</a>  <a class="externalLink" href="https://github.com/mp911de/configurator-maven-plugin/tarball/master">Download TAR Ball</a></p></div>
+            <h1>Usage</h1><div class="section"><h2>Usage<a name="Usage"></a></h2><p>The JAR Configurator Maven-Plugin is generally used to configure packaged artifacts. You define one or more template files (naming pattern <i>.template.</i>) which will  be processed. Template variables are replaced by property values.</p><p>Example:</p><p>Template-File <b>config.template.properties</b></p>
+<div class="source"><pre class="prettyprint linenums">username=@db.username@
+url=@db.url@
+</pre></div><p>Properties-File <b>production.properties</b></p>
+<div class="source"><pre class="prettyprint linenums">db.username=mark
+db.url=jdbc:mysql://...
+</pre></div><p>will become then</p><p><b>config.properties</b></p>
+<div class="source"><pre class="prettyprint linenums">username=mark
+url=jdbc:mysql://...
+</pre></div><p>This method is intended primarily for Java Web Applications and Java Enterprise Applications which are packaged as WAR  or EAR file. As soon as you start packaging and deploying (artifact repository) environment-configured artifacts, the are  not portable anymore. With this plugin you are able to create templated artifacts. Just before deployment you finalize  the configuration by injecting property values into your WAR/EAR.</p><p>All WARs/JARs within an EAR/WAR/JAR will be processed (recursive).</p><p>The <a href="./configure-mojo.html">configurator:configure</a> configures the build file from your current project.</p><p>The <a href="./configure-artifact-mojo.html">configurator:configure-artifact</a> configures an arbitrary, external artifact.</p></div>
                   </div>
             </div>
           </div>
