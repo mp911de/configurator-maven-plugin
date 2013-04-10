@@ -9,11 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>JAR Configurator Maven-Plugin</name>
+    <url>http://mp911de.github.io/configurator-maven-plugin/</url>
 
     <scm>
         <connection>scm:git://github.com/mp911de/configurator-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:mp911de/configurator-maven-plugin.git</developerConnection>
-        <url>http://github.com/mp911de/configurator-maven-plugin.git</url>
+        <url>http://github.com/mp911de/configurator-maven-plugin/</url>
     </scm>
 
     <licenses>
@@ -26,6 +27,9 @@
 
     <properties>
         <github.global.server>github</github.global.server>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
 
         <mavenVersion>2.0.9</mavenVersion>
         <pluginTestingVersion>2.1</pluginTestingVersion>
@@ -40,6 +44,8 @@
         <version.com.google.guava.guava>14.0.1</version.com.google.guava.guava>
         <version.commons-io.commons-io>2.4</version.commons-io.commons-io>
         <version.org.mockito.mockito-all>1.9.5</version.org.mockito.mockito-all>
+        <version.org.apache.maven.plugins.maven-javadoc-plugin>2.9
+        </version.org.apache.maven.plugins.maven-javadoc-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.com.github.github.site-maven-plugin>0.6</version.com.github.github.site-maven-plugin>
     </properties>
@@ -51,9 +57,22 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>${version.org.apache.maven.plugins.plugin}</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${version.org.apache.maven.plugins.maven-javadoc-plugin}</version>
+            </plugin>
         </plugins>
-
     </reporting>
+
+    <developers>
+        <developer>
+            <email>mpaluch@paluch.biz</email>
+            <name>Mark Paluch</name>
+            <timezone>Europe/Berlin</timezone>
+            <url>http://www.paluch.biz</url>
+        </developer>
+    </developers>
 
     <build>
         <plugins>
@@ -109,7 +128,7 @@
                             <goal>helpmojo</goal>
                         </goals>
                         <configuration>
-                            <helpPackageName>org.jboss.as.plugin.generated</helpPackageName>
+                            <helpPackageName>de.paluch.maven.configurator.generated</helpPackageName>
                         </configuration>
                     </execution>
                 </executions>

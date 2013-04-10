@@ -13,3 +13,8 @@ Goals Overview
  * [configurator:configure](./configure-mojo.html) configure the target file of the current project.
 
  * [configurator:configure-artifact](./configure-artifact-mojo.html) configure an arbitrary artifact.
+
+
+ [Download ZIP File](https://github.com/mp911de/configurator-maven-plugin/zipball/master)
+ [Download TAR Ball](https://github.com/mp911de/configurator-maven-plugin/tarball/master)
+

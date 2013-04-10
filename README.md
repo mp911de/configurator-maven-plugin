@@ -38,6 +38,8 @@ the configuration by injecting property values into your WAR/EAR.
 
 All WAR's/JAR's within an EAR/WAR/JAR will be processed (recursive).
 
+See also [Maven Site](http://mp911de.github.io/configurator-maven-plugin) for more details.
+
 Maven Configuration
 -------------------
 
@@ -88,3 +90,4 @@ Goals
 
 # License
 * [MIT License](http://www.opensource.org/licenses/mit-license.php)
+

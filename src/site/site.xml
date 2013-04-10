@@ -1,17 +1,15 @@
-<project xmlns="http://maven.apache.org/DECORATION/1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd"
-         name="Configurator Maven Plugin">
+<project name="Configurator Maven Plugin">
     <bannerLeft>
         <name>Configurator Maven Plugin</name>
-        <href>http://github.com/mp911de/configurator-maven-plugin</href>
+        <href>http://mp911de.github.io/configurator-maven-plugin/</href>
     </bannerLeft>
+
 
     <body>
         <menu name="Overview">
             <item name="Introduction" href="index.html"/>
             <item name="Goals" href="plugin-info.html"/>
             <item name="Usage" href="usage.html"/>
-            <item name="FAQ" href="faq.html"/>
         </menu>
 
         <menu name="Examples">
@@ -26,6 +24,24 @@
 
         <menu ref="reports"/>
     </body>
+
+
+    <custom>
+        <fluidoSkin>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <gitHub>
+                <projectId>mp911de/configurator-maven-plugin</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>black</ribbonColor>
+            </gitHub>
+            <twitter>
+                <user>mp911de</user>
+                <showUser>true</showUser>
+                <showFollowers>true</showFollowers>
+            </twitter>
+            <facebookLike/>
+        </fluidoSkin>
+    </custom>
 
     <skin>
         <groupId>org.apache.maven.skins</groupId>
