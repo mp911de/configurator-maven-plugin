@@ -10,9 +10,11 @@ Goals Overview
 -----------
  General information about the goals.
 
- * [configurator:configure](./configure-mojo.html) configure the target file of the current project.
+ * [configurator:configure](./configure-mojo.html) configure the target output of the current project.
 
  * [configurator:configure-artifact](./configure-artifact-mojo.html) configure an arbitrary artifact.
+
+ * [configurator:configure-file](./configure-file-mojo.html) configures an external file.
 
 
  [Download ZIP File](https://github.com/mp911de/configurator-maven-plugin/zipball/master)

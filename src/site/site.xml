@@ -13,9 +13,9 @@
         </menu>
 
         <menu name="Examples">
-            <item name="Configure a JAR File" href="examples/configure-jar.html"/>
-            <item name="Configure a WAR File" href="examples/configure-war.html"/>
-            <item name="Configure an EAR File" href="examples/configure-ear.html"/>
+            <item name="Configure a WAR Artifact" href="examples/configure-war-artifact.html"/>
+            <item name="Configure an EAR File" href="examples/configure-ear-file.html"/>
+            <item name="External Properties" href="examples/external-properties.html"/>
         </menu>
 
         <menu name="Project Documentation">
@@ -39,7 +39,6 @@
                 <showUser>true</showUser>
                 <showFollowers>true</showFollowers>
             </twitter>
-            <facebookLike/>
         </fluidoSkin>
     </custom>
 

@@ -8,7 +8,7 @@
     <artifactId>configurator-maven-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
-    <name>JAR Configurator Maven-Plugin</name>
+    <name>Configurator Maven-Plugin for configuring artifacts after its build</name>
     <url>http://mp911de.github.io/configurator-maven-plugin/</url>
 
     <scm>
@@ -35,8 +35,7 @@
         <pluginTestingVersion>2.1</pluginTestingVersion>
         <version.junit.junit>4.11</version.junit.junit>
         <version.hamcrest.hamcrest>1.3</version.hamcrest.hamcrest>
-        <version.org.apache.maven.shared.maven-plugin-testing-harness>1.1
-        </version.org.apache.maven.shared.maven-plugin-testing-harness>
+        <version.org.apache.maven.shared.maven-plugin-testing-harness>1.1</version.org.apache.maven.shared.maven-plugin-testing-harness>
         <version.org.apache.maven.plugin-tools>3.2</version.org.apache.maven.plugin-tools>
         <version.org.apache.maven.plugins.plugin>3.2</version.org.apache.maven.plugins.plugin>
         <version.org.apache.maven.plugins.site-plugin>3.2</version.org.apache.maven.plugins.site-plugin>
@@ -44,8 +43,7 @@
         <version.com.google.guava.guava>14.0.1</version.com.google.guava.guava>
         <version.commons-io.commons-io>2.4</version.commons-io.commons-io>
         <version.org.mockito.mockito-all>1.9.5</version.org.mockito.mockito-all>
-        <version.org.apache.maven.plugins.maven-javadoc-plugin>2.9
-        </version.org.apache.maven.plugins.maven-javadoc-plugin>
+        <version.org.apache.maven.plugins.maven-javadoc-plugin>2.9 </version.org.apache.maven.plugins.maven-javadoc-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.com.github.github.site-maven-plugin>0.6</version.com.github.github.site-maven-plugin>
     </properties>

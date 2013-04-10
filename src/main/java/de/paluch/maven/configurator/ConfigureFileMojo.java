@@ -22,24 +22,31 @@
 
 package de.paluch.maven.configurator;
 
+import de.paluch.maven.configurator.AbstractConfigureMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
 /**
- * Perform configuration for the project artifact.
+ * Perform configuration an arbitrary, external file.
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-@Mojo(name = "configure", defaultPhase = LifecyclePhase.PACKAGE)
-@Execute(phase = LifecyclePhase.PACKAGE)
-public class ConfigureMojo extends AbstractConfigureMojo {
+@Mojo(name = "configure-file")
+public class ConfigureFileMojo extends AbstractConfigureMojo {
 
     /**
-     * Perform configuration for the project artifact.
+     * The target directory the application to be deployed is located.
+     */
+    @Parameter
+    protected File file;
+
+    /**
+     * Perform configuration an arbitrary, external file.
      *
      * @throws org.apache.maven.plugin.MojoExecutionException
      * @throws org.apache.maven.plugin.MojoFailureException
@@ -47,22 +54,19 @@ public class ConfigureMojo extends AbstractConfigureMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
 
-
-        PackageType packageType = resolvePackageType(project.getPackaging());
-
-        String fileName = project.getBuild().getFinalName() + "." + packageType.getFileExtension();
-        configure(new File(targetDir, fileName));
-    }
-
-    private PackageType resolvePackageType(String packaging) throws MojoExecutionException {
-
-
-        for (PackageType packagingType : PackageType.values()) {
-            if (packagingType.getPackaging().equalsIgnoreCase(packaging)) {
-                return packagingType;
-            }
+        if (file == null) {
+            throw new MojoExecutionException("file must not be null");
         }
-        throw new MojoExecutionException("Cannot process packaging type " + packaging);
+
+        if (!file.exists()) {
+            throw new MojoExecutionException("File " + file + " does not exist");
+        }
+
+        if (!file.isFile()) {
+            throw new MojoExecutionException("File " + file + " must be a file");
+        }
+
+        configure(file);
     }
 
 }

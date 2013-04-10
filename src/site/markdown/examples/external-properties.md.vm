@@ -1,0 +1,38 @@
+External properties
+============
+
+By default, only the Maven Project Properties are used for the value injection. You can specify additional properties
+to extend the possible key/value pairs. External properties are not added to the general Maven Project Properties.
+
+External Properties can be either Files or URL's.
+
+    <project>
+      ...
+        <build>
+        ...
+            <plugins>
+            ...
+                <plugin>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}</artifactId>
+                <version>${version}</version>
+                    <configuration>
+                        <groupId>myGroupId</groupId>
+                        <artifactId>myArtifactId</artifactIdId>
+                        <version>1.2.5</version>
+                        <propertySources>
+                            <propertySource>profiles/production.properties</propertySource>
+                            <propertySource>http://config.server.com/profiles/remote.properties</propertySource>
+                        </propertySources>
+                    </configuration>
+                </plugin>
+            ...
+            </plugins>
+        ...
+        </build>
+    ...
+    </project>
+
+
+
+

@@ -1,9 +1,6 @@
 Usage
 ============
 
-Usage
----------
-
   The ${project.name} is generally used to configure packaged artifacts. You define one or more template files (naming pattern *.template.*) which will
   be processed. Template variables are replaced by property values.
 
@@ -44,3 +41,6 @@ Usage
 
   The [configurator:configure-artifact](./configure-artifact-mojo.html) configures an arbitrary, external artifact.
 
+### The *configurator:configure-file* Goal
+
+  The [configurator:configure-file](./configure-file-mojo.html) configures an external file.

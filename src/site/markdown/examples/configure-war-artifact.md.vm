@@ -1,0 +1,31 @@
+Configure a WAR Artifact
+============
+
+  You can configure artifacts identified by GroupId/ArtifactId/Version which are resolved by the Maven
+  Dependency Resolution. Specify therefore GroupId/ArtifactId/Version and optional Type/Classifier. Output will be
+  generated at `target/configurator`.
+
+    <project>
+      ...
+        <build>
+        ...
+            <plugins>
+            ...
+                <plugin>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}</artifactId>
+                <version>${version}</version>
+                    <configuration>
+                        <groupId>myGroupId</groupId>
+                        <artifactId>myArtifactId</artifactIdId>
+                        <version>1.2.5</version>
+                    </configuration>
+                </plugin>
+            ...
+            </plugins>
+        ...
+        </build>
+    ...
+    </project>
+
+Then just run `mvn configurator:configure-artifact`.

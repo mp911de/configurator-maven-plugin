@@ -1,0 +1,30 @@
+Configure an EAR File
+============
+
+  You can use this plugin in order to configure external files which are not resolved by the Maven Dependency
+  Resolution. Simply specify the file-tag to your external file. Output will be generated at `target/configurator`.
+
+    <project>
+      ...
+        <build>
+        ...
+            <plugins>
+            ...
+                <plugin>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}</artifactId>
+                <version>${version}</version>
+                    <configuration>
+                        <file>path/to/my/file.ear</file>
+                    </configuration>
+                </plugin>
+            ...
+            </plugins>
+        ...
+        </build>
+    ...
+    </project>
+
+Then just run `mvn configurator:configure-file`.
+In file mode you just need any zip-file for processing.
+
