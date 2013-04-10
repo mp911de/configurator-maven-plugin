@@ -20,35 +20,50 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator.model;
+package biz.paluch.maven.configurator;
+
+import org.apache.maven.project.MavenProject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
- * @since 08.04.13 11:41
  */
-public class CompressedContainer extends Container {
-    private PackagingType packagingType;
+public enum PackageType {
+
+    EJB("ejb", "jar"), WAR("war"), EAR("ear"), RAR("rar"), JAR("jar");
 
 
-    public CompressedContainer(String name) {
-        super(name);
+    private final String packaging;
+    private final String fileExtension;
+
+    private PackageType(final String packaging) {
+        this.packaging = packaging;
+        this.fileExtension = packaging;
     }
 
-    public PackagingType getPackagingType() {
-        return packagingType;
+    private PackageType(final String packaging, final String fileExtension) {
+        this.packaging = packaging;
+        this.fileExtension = fileExtension;
     }
 
-    public void setPackagingType(PackagingType packagingType) {
-        this.packagingType = packagingType;
+
+    /**
+     * Returns the raw packaging type.
+     *
+     * @return the packaging type
+     */
+    public String getPackaging() {
+        return packaging;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [name=").append(getName());
-        sb.append(", packagingType=").append(packagingType);
-        sb.append(']');
-        return sb.toString();
+    /**
+     * Returns the file extension that should be used.
+     *
+     * @return the file extension
+     */
+    public String getFileExtension() {
+        return fileExtension;
     }
 }

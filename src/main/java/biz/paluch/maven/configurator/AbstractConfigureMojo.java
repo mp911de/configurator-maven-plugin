@@ -20,11 +20,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator;
+package biz.paluch.maven.configurator;
 
 import com.google.common.base.Preconditions;
 import com.google.common.io.Closer;
-import de.paluch.maven.configurator.model.Container;
+import biz.paluch.maven.configurator.model.Container;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;

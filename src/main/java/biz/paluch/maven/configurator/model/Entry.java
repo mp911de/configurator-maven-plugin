@@ -20,50 +20,35 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator;
-
-import org.apache.maven.project.MavenProject;
-
-import java.util.HashMap;
-import java.util.Map;
+package biz.paluch.maven.configurator.model;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
+ * @since 08.04.13 12:48
  */
-public enum PackageType {
+public class Entry {
 
-    EJB("ejb", "jar"), WAR("war"), EAR("ear"), RAR("rar"), JAR("jar");
+    private String name;
 
 
-    private final String packaging;
-    private final String fileExtension;
-
-    private PackageType(final String packaging) {
-        this.packaging = packaging;
-        this.fileExtension = packaging;
+    public Entry(String name) {
+        this.name = name;
     }
 
-    private PackageType(final String packaging, final String fileExtension) {
-        this.packaging = packaging;
-        this.fileExtension = fileExtension;
+    public String getName() {
+        return name;
     }
 
-
-    /**
-     * Returns the raw packaging type.
-     *
-     * @return the packaging type
-     */
-    public String getPackaging() {
-        return packaging;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * Returns the file extension that should be used.
-     *
-     * @return the file extension
-     */
-    public String getFileExtension() {
-        return fileExtension;
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [name='").append(name).append('\'');
+        sb.append(']');
+        return sb.toString();
     }
 }

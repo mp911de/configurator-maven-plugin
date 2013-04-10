@@ -20,45 +20,50 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator;
+package biz.paluch.maven.configurator;
 
-import com.google.common.io.Closer;
-import org.apache.commons.io.IOUtils;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
-import java.io.*;
-import java.util.Properties;
+import java.io.File;
 
 /**
+ * Perform configuration an arbitrary, external file.
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-public class TemplateProcessor {
-    private Properties properties;
+@Mojo(name = "configure-file")
+public class ConfigureFileMojo extends AbstractConfigureMojo {
 
-    private String tokenStart;
-    private String tokenEnd;
+    /**
+     * The target directory the application to be deployed is located.
+     */
+    @Parameter
+    protected File file;
 
-    public TemplateProcessor(Properties properties, String tokenStart, String tokenEnd) {
-        this.properties = properties;
-        this.tokenStart = tokenStart;
-        this.tokenEnd = tokenEnd;
-    }
+    /**
+     * Perform configuration an arbitrary, external file.
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException
+     * @throws org.apache.maven.plugin.MojoFailureException
+     */
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
 
-    public void processFile(File input, File output) throws IOException {
-
-        Closer closer = Closer.create();
-        try {
-
-            InputStream fis = closer.register(new FileInputStream(input));
-            OutputStream fos = closer.register(new BufferedOutputStream(new FileOutputStream(output)));
-            processStream(fis, fos);
-
-        } finally {
-            closer.close();
+        if (file == null) {
+            throw new MojoExecutionException("file must not be null");
         }
+
+        if (!file.exists()) {
+            throw new MojoExecutionException("File " + file + " does not exist");
+        }
+
+        if (!file.isFile()) {
+            throw new MojoExecutionException("File " + file + " must be a file");
+        }
+
+        configure(file);
     }
 
-    public void processStream(InputStream inputStream, OutputStream outputStream) throws IOException {
-
-        IOUtils.copy(new PropertyReplacingInputStream(new BufferedInputStream(inputStream), properties, tokenStart, tokenEnd), outputStream);
-    }
 }

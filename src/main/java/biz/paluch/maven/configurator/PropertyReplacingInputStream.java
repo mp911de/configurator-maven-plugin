@@ -20,7 +20,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator;
+package biz.paluch.maven.configurator;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,7 +1,7 @@
 <project name="Configurator Maven Plugin">
     <bannerLeft>
         <name>Configurator Maven Plugin</name>
-        <href>http://mp911de.github.io/configurator-maven-plugin/</href>
+        <href>http://maven.paluch.biz/configurator-maven-plugin/</href>
     </bannerLeft>
 
 

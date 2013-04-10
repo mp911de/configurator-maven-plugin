@@ -20,22 +20,24 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator.model;
+package biz.paluch.maven.configurator.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
- * @since 08.04.13 11:38
+ * @since 08.04.13 11:40
  */
-public enum PackagingType {
-    EAR("ear"), JAR("jar"), WAR("war"), RAR("rar");
+public class Container extends Entry {
 
-    private String type;
+    private List<Entry> entries = new ArrayList<Entry>();
 
-    private PackagingType(String type) {
-        this.type = type;
+    public Container(String name) {
+        super(name);
     }
 
-    public String getType() {
-        return type;
+    public List<Entry> getEntries() {
+        return entries;
     }
 }

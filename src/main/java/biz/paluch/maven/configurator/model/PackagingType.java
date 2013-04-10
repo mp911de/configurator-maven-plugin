@@ -20,35 +20,22 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator.model;
+package biz.paluch.maven.configurator.model;
 
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
- * @since 08.04.13 12:48
+ * @since 08.04.13 11:38
  */
-public class Entry {
+public enum PackagingType {
+    EAR("ear"), JAR("jar"), WAR("war"), RAR("rar");
 
-    private String name;
+    private String type;
 
-
-    public Entry(String name) {
-        this.name = name;
+    private PackagingType(String type) {
+        this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [name='").append(name).append('\'');
-        sb.append(']');
-        return sb.toString();
+    public String getType() {
+        return type;
     }
 }

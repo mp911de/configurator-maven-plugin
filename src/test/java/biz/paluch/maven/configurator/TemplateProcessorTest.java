@@ -1,5 +1,6 @@
-package de.paluch.maven.configurator;
+package biz.paluch.maven.configurator;
 
+import biz.paluch.maven.configurator.TemplateProcessor;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;

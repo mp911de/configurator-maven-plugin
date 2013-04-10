@@ -20,12 +20,12 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.paluch.maven.configurator;
+package biz.paluch.maven.configurator;
 
-import de.paluch.maven.configurator.model.CompressedContainer;
-import de.paluch.maven.configurator.model.Container;
-import de.paluch.maven.configurator.model.Entry;
-import de.paluch.maven.configurator.model.PackagingType;
+import biz.paluch.maven.configurator.model.CompressedContainer;
+import biz.paluch.maven.configurator.model.Container;
+import biz.paluch.maven.configurator.model.Entry;
+import biz.paluch.maven.configurator.model.PackagingType;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.io.RawInputStreamFacade;
 
