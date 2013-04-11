@@ -30,6 +30,7 @@ import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -41,7 +42,7 @@ import java.util.List;
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  * @since 08.04.13 10:10
  */
-@Mojo(name = "configure-artifact", defaultPhase = LifecyclePhase.PACKAGE)
+@Mojo(name = "configure-artifact")
 public class ConfigureArtifactMojo extends AbstractConfigureMojo {
 
 

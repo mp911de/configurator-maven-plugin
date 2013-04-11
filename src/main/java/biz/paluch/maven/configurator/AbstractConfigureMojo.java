@@ -137,6 +137,7 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
     private Properties getProperties() throws IOException {
 
         Properties properties = new Properties();
+        properties.putAll(System.getProperties());
         properties.putAll(project.getProperties());
 
         if (propertySources != null) {

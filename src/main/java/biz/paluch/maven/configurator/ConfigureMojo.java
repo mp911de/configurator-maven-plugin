@@ -34,7 +34,7 @@ import java.io.File;
  * Perform configuration for the project artifact.
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-@Mojo(name = "configure", defaultPhase = LifecyclePhase.PACKAGE)
+@Mojo(name = "configure")
 @Execute(phase = LifecyclePhase.PACKAGE)
 public class ConfigureMojo extends AbstractConfigureMojo {
 
