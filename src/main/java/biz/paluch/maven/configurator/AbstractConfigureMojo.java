@@ -107,7 +107,7 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
             Properties properties = getProperties();
 
             getLog().info("Processing Files");
-            TemplateProcessor processor = new TemplateProcessor(properties, tokenStart, tokenEnd);
+            TemplateProcessor processor = new TemplateProcessor(properties, tokenStart, tokenEnd, getLog());
             FileTemplating.processFiles(targetWork, processor);
 
             getLog().info("Compressing to " + finalFile);
@@ -172,4 +172,6 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
             throw new IOException("Cannot load property from source " + propertySource, e);
         }
     }
+
+
 }

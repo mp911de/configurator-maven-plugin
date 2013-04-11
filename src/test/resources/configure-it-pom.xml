@@ -19,6 +19,9 @@
                     <groupId>junit</groupId>
                     <artifactId>junit</artifactId>
                     <version>4.11</version>
+                    <propertySources>
+                        <propertySource>src/test/resources/test.properties</propertySource>
+                    </propertySources>
                 </configuration>
             </plugin>
         </plugins>

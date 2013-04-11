@@ -24,23 +24,27 @@ package biz.paluch.maven.configurator;
 
 import com.google.common.io.Closer;
 import org.apache.commons.io.IOUtils;
+import org.apache.maven.plugin.logging.Log;
 
 import java.io.*;
 import java.util.Properties;
 
 /**
+ * Template Processor. Processing of a Template File.
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-public class TemplateProcessor {
+public class TemplateProcessor implements PropertyReplacingListener {
     private Properties properties;
 
     private String tokenStart;
     private String tokenEnd;
+    private Log log;
 
-    public TemplateProcessor(Properties properties, String tokenStart, String tokenEnd) {
+    public TemplateProcessor(Properties properties, String tokenStart, String tokenEnd, Log log) {
         this.properties = properties;
         this.tokenStart = tokenStart;
         this.tokenEnd = tokenEnd;
+        this.log = log;
     }
 
     public void processFile(File input, File output) throws IOException {
@@ -50,7 +54,13 @@ public class TemplateProcessor {
 
             InputStream fis = closer.register(new FileInputStream(input));
             OutputStream fos = closer.register(new BufferedOutputStream(new FileOutputStream(output)));
+
+            log.debug("Processing file " + input);
+            log.debug("Output file " + output);
+
             processStream(fis, fos);
+
+            log.debug("Processing file " + input + " done");
 
         } finally {
             closer.close();
@@ -59,6 +69,18 @@ public class TemplateProcessor {
 
     public void processStream(InputStream inputStream, OutputStream outputStream) throws IOException {
 
-        IOUtils.copy(new PropertyReplacingInputStream(new BufferedInputStream(inputStream), properties, tokenStart, tokenEnd), outputStream);
+
+        PropertyReplacingInputStream propertyReplacingInputStream = new PropertyReplacingInputStream(new BufferedInputStream(inputStream), properties, tokenStart, tokenEnd);
+        propertyReplacingInputStream.setListener(this);
+        IOUtils.copy(propertyReplacingInputStream, outputStream);
+    }
+
+    @Override
+    public void notifyPropertyFound(String key) {
+    }
+
+    @Override
+    public void notifyPropertyReplaced(String key, String value) {
+        log.debug("Setting value " + value + " for property " + key);
     }
 }

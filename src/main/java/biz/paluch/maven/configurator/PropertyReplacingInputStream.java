@@ -27,6 +27,14 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
+ * InputStream to replace properties on the stream.
+ * This InputStream reads each byte, as soon as a token start is identified, it scans for MAX_SCAN_LENGTH and tries
+ * to find the complete placeholder. As soon as the end of the placeholder is found,
+ * the property is looked up and tried to be replaced by its value. In case a property is not resolvable,
+ * an IOException is thrown.
+ *
+ * Internal usage of a Queue to buffer and replay read bytes, for not loosing them.
+ *
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
 public class PropertyReplacingInputStream extends InputStream {
@@ -45,6 +53,8 @@ public class PropertyReplacingInputStream extends InputStream {
     private byte[] endBytes;
 
     private Queue<Integer> buffer = new ArrayDeque<Integer>(MAX_SCAN_LENGTH);
+
+    private PropertyReplacingListener listener;
 
 
     public PropertyReplacingInputStream(InputStream parent, Properties properties, String tokenStart, String tokenEnd) {
@@ -130,9 +140,15 @@ public class PropertyReplacingInputStream extends InputStream {
                     byte[] theBytes = stripStartEnd(startBytes, endBytes, buffer);
 
                     String key = new String(theBytes);
+                    if (listener != null) {
+                        listener.notifyPropertyFound(key);
+                    }
+
                     if (properties.containsKey(key)) {
                         buffer.clear();
-                        buffer.addAll(toIntegerList(properties.getProperty(key)));
+                        String value = properties.getProperty(key);
+                        listener.notifyPropertyReplaced(key, value);
+                        buffer.addAll(toIntegerList(value));
                         return read();
                     } else {
                         throw new IOException("Cannot resolve key " + tokenStart + key + tokenEnd + " to a value.");
@@ -206,5 +222,13 @@ public class PropertyReplacingInputStream extends InputStream {
         }
 
         return parent.available();
+    }
+
+    public PropertyReplacingListener getListener() {
+        return listener;
+    }
+
+    public void setListener(PropertyReplacingListener listener) {
+        this.listener = listener;
     }
 }

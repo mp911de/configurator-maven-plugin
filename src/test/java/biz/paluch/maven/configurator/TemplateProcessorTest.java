@@ -1,6 +1,7 @@
 package biz.paluch.maven.configurator;
 
 import biz.paluch.maven.configurator.TemplateProcessor;
+import org.apache.maven.plugin.testing.SilentLog;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -20,7 +21,7 @@ public class TemplateProcessorTest {
         System.setProperty("user.blubb", "zack");
         String myString = "a=b\n" + "x=@user.blubb@";
 
-        TemplateProcessor sut = new TemplateProcessor(System.getProperties(), "@", "@");
+        TemplateProcessor sut = new TemplateProcessor(System.getProperties(), "@", "@", new SilentLog());
 
         ByteArrayInputStream bais = new ByteArrayInputStream(myString.getBytes());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -63,7 +64,7 @@ public class TemplateProcessorTest {
     }
 
     private ByteArrayOutputStream invokeTest(String myString) throws IOException {
-        TemplateProcessor sut = new TemplateProcessor(System.getProperties(), "${", "}");
+        TemplateProcessor sut = new TemplateProcessor(System.getProperties(), "${", "}",new SilentLog());
 
         ByteArrayInputStream bais = new ByteArrayInputStream(myString.getBytes());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
