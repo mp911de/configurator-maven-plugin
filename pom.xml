@@ -56,6 +56,7 @@
         </version.org.apache.maven.plugins.maven-release-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.com.github.github.site-maven-plugin>0.6</version.com.github.github.site-maven-plugin>
+        <version.org.apache.maven.plugins.maven-javadoc-plugin>2.7</version.org.apache.maven.plugins.maven-javadoc-plugin>
     </properties>
 
     <reporting>
