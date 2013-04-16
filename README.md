@@ -1,3 +1,5 @@
+[![Build Status](https://buildhive.cloudbees.com/job/mp911de/job/configurator-maven-plugin/badge/icon)](https://buildhive.cloudbees.com/job/mp911de/job/configurator-maven-plugin/)
+
 Introduction
 =============
 
