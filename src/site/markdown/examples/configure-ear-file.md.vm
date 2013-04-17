@@ -11,9 +11,9 @@ Configure an EAR File
             <plugins>
             ...
                 <plugin>
-                <groupId>${groupId}</groupId>
-                <artifactId>${artifactId}</artifactId>
-                <version>${version}</version>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${project.version}</version>
                     <configuration>
                         <file>path/to/my/file.ear</file>
                     </configuration>
