@@ -51,7 +51,7 @@ public class ConfigureMojo extends AbstractConfigureMojo {
         PackageType packageType = resolvePackageType(project.getPackaging());
 
         String fileName = project.getBuild().getFinalName() + "." + packageType.getFileExtension();
-        configure(new File(targetDir, fileName));
+        configure(new File(project.getBuild().getDirectory(), fileName));
     }
 
     private PackageType resolvePackageType(String packaging) throws MojoExecutionException {

@@ -41,7 +41,8 @@ import java.util.zip.ZipOutputStream;
 /**
  * Abstract base to perform configuration.
  */
-public abstract class AbstractConfigureMojo extends AbstractMojo {
+public abstract class AbstractConfigureMojo extends AbstractMojo
+{
 
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     protected MavenProject project;
@@ -70,13 +71,14 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}/")
     protected File targetDir;
 
-
     /**
      * Perform Configuration.
+     *
      * @param artifactFile
      * @throws MojoExecutionException
      */
-    protected void configure(File artifactFile) throws MojoExecutionException {
+    protected void configure(File artifactFile) throws MojoExecutionException
+    {
 
         Preconditions.checkArgument(tokenStart != null && !tokenStart.isEmpty(), "tokenStart must not be empty");
         Preconditions.checkArgument(tokenEnd != null && !tokenEnd.isEmpty(), "tokenEnd must not be empty");
@@ -85,7 +87,8 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
         File targetWork = new File(targetConfigurator, "work");
         File finalFile = new File(targetConfigurator, artifactFile.getName());
 
-        if (!targetWork.exists()) {
+        if (!targetWork.exists())
+        {
             targetWork.mkdirs();
         }
 
@@ -95,9 +98,10 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
 
         Container container = new Container(artifactFile.getName());
 
-        try {
-            ZipInputStream zis = closer.register(new ZipInputStream(new BufferedInputStream(new FileInputStream(artifactFile))));
-
+        try
+        {
+            ZipInputStream zis =
+                    closer.register(new ZipInputStream(new BufferedInputStream(new FileInputStream(artifactFile))));
 
             getLog().info("Extracting " + artifactFile + " to " + targetWork);
             ZipFileIteratorAndExtractor iterator = new ZipFileIteratorAndExtractor(container, zis, targetWork);
@@ -108,70 +112,85 @@ public abstract class AbstractConfigureMojo extends AbstractMojo {
 
             getLog().info("Processing Files");
             TemplateProcessor processor = new TemplateProcessor(properties, tokenStart, tokenEnd, getLog());
-            FileTemplating.processFiles(targetWork, processor);
+            FileTemplating.processFiles(getLog(), targetWork, processor);
 
             getLog().info("Compressing to " + finalFile);
-            ZipOutputStream zos = closer.register(new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(finalFile))));
+            ZipOutputStream zos =
+                    closer.register(new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(finalFile))));
             ZipFileCompressor compressor = new ZipFileCompressor(container, zos, targetWork);
-            compressor.compress();
+            compressor.compress(getLog());
 
             getLog().info("Done.");
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             getLog().error(e);
             throw new MojoExecutionException(e.getMessage(), e);
-        } finally {
-            try {
+        } finally
+        {
+            try
+            {
                 closer.close();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 throw new MojoExecutionException(e.getMessage(), e);
             }
         }
     }
 
-
     /**
-     *
      * @return Project properties and propertySources.
      * @throws IOException
      */
-    private Properties getProperties() throws IOException {
+    private Properties getProperties() throws IOException
+    {
 
         Properties properties = new Properties();
         properties.putAll(System.getProperties());
         properties.putAll(project.getProperties());
 
-        if (propertySources != null) {
+        if (propertySources != null)
+        {
 
             Closer closer = Closer.create();
-            try {
-                for (String propertySource : propertySources) {
+            try
+            {
+                for (String propertySource : propertySources)
+                {
                     loadPropertySource(properties, closer, propertySource);
                 }
-            } finally {
+            } finally
+            {
                 closer.close();
             }
         }
         return properties;
     }
 
-    private void loadPropertySource(Properties properties, Closer closer, String propertySource) throws IOException {
-        try {
+    private void loadPropertySource(Properties properties, Closer closer, String propertySource) throws IOException
+    {
+        try
+        {
             File file = new File(propertySource);
             InputStream is = null;
-            if (file.exists()) {
+            if (file.exists())
+            {
+                getLog().debug("Using File Property Source " + file);
                 is = closer.register(new BufferedInputStream(new FileInputStream(file)));
 
-            } else {
+            } else
+            {
                 URL url = new URL(propertySource);
+
+                getLog().debug("Using URL Property Source " + url);
                 URLConnection connection = url.openConnection();
                 is = closer.register(connection.getInputStream());
             }
 
             properties.load(is);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             throw new IOException("Cannot load property from source " + propertySource, e);
         }
     }
-
 
 }

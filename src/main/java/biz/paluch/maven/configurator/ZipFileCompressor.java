@@ -27,31 +27,36 @@ import biz.paluch.maven.configurator.model.CompressedContainer;
 import biz.paluch.maven.configurator.model.Container;
 import biz.paluch.maven.configurator.model.Entry;
 import biz.paluch.maven.configurator.model.PackagingType;
+import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
  * Create a Zip-File using a given Container model. Acts recursively in order to create zip-in-zip-in-zip.
+ *
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  * @since 08.04.13 11:44
  */
-public class ZipFileCompressor {
+public class ZipFileCompressor
+{
 
     private Container container;
     private ZipOutputStream zos;
     private File compressionBase;
-
 
     /**
      * @param container
      * @param zos
      * @param compressionBase base-path for compression.
      */
-    public ZipFileCompressor(Container container, ZipOutputStream zos, File compressionBase) {
+    public ZipFileCompressor(Container container, ZipOutputStream zos, File compressionBase)
+    {
         this.container = container;
         this.zos = zos;
         this.compressionBase = compressionBase;
@@ -59,23 +64,37 @@ public class ZipFileCompressor {
 
     /**
      * Compress the files.
+     *
+     * @param log
      * @throws IOException
      */
-    public void compress() throws IOException {
+    public void compress(Log log) throws IOException
+    {
 
-
-        for (Entry entry : container.getEntries()) {
-
+        Set<String> uniqueEntryNames = new HashSet<String>();
+        for (Entry entry : container.getEntries())
+        {
 
             File source = new File(compressionBase, entry.getName());
+
+            if (!uniqueEntryNames.add(entry.getName().toLowerCase()))
+            {
+                log.warn("Container " + container.getName() + ", Entry " + entry.getName() +
+                                 " already exists, skipping");
+                continue;
+
+            }
+
             ZipEntry ze = getZipEntry(entry.getName(), source);
 
-            if (entry instanceof CompressedContainer && source.isDirectory()) {
-                compress((CompressedContainer) entry, source, ze);
+            if (entry instanceof CompressedContainer && source.isDirectory())
+            {
+                compress(log, (CompressedContainer) entry, source, ze);
                 continue;
             }
 
-            if (source.isDirectory()) {
+            if (source.isDirectory())
+            {
                 continue;
             }
 
@@ -89,47 +108,58 @@ public class ZipFileCompressor {
 
     /**
      * Create a nested Zip-Entry (zip-in-zip).
+     *
+     * @param log
      * @param entry
      * @param source
      * @param ze
      * @throws IOException
      */
-    private void compress(CompressedContainer entry, File source, ZipEntry ze) throws IOException {
+    private void compress(Log log, CompressedContainer entry, File source, ZipEntry ze) throws IOException
+    {
         CompressedContainer cc = (CompressedContainer) entry;
         zos.putNextEntry(ze);
 
-        ZipOutputStream subZipStream = new ZipOutputStream(new FilterOutputStream(zos) {
+        ZipOutputStream subZipStream = new ZipOutputStream(new FilterOutputStream(zos)
+        {
             @Override
-            public void close() throws IOException {
+            public void close() throws IOException
+            {
 
             }
         });
 
         ZipFileCompressor compressor = new ZipFileCompressor(cc, subZipStream, source);
-        compressor.compress();
+        compressor.compress(log);
         zos.closeEntry();
     }
 
-    private ZipEntry getZipEntry(String name, File source) {
-        ZipEntry ze = new ZipEntry( name);
+    private ZipEntry getZipEntry(String name, File source)
+    {
+        ZipEntry ze = new ZipEntry(name);
         ze.setTime(source.lastModified());
         ze.setSize(source.length());
         return ze;
     }
 
-    private boolean isPackagedFile(ZipEntry entry) {
-        if (getPackagingType(entry) != null) {
+    private boolean isPackagedFile(ZipEntry entry)
+    {
+        if (getPackagingType(entry) != null)
+        {
             return true;
         }
 
         return false;
     }
 
-    private PackagingType getPackagingType(ZipEntry entry) {
+    private PackagingType getPackagingType(ZipEntry entry)
+    {
         String name = entry.getName().toLowerCase();
 
-        for (PackagingType packagingType : PackagingType.values()) {
-            if (name.endsWith("." + packagingType.getType())) {
+        for (PackagingType packagingType : PackagingType.values())
+        {
+            if (name.endsWith("." + packagingType.getType()))
+            {
                 return packagingType;
             }
         }

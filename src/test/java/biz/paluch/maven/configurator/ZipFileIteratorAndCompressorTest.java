@@ -1,6 +1,7 @@
 package biz.paluch.maven.configurator;
 
 import biz.paluch.maven.configurator.model.Container;
+import org.apache.maven.plugin.testing.SilentLog;
 import org.codehaus.plexus.PlexusTestCase;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.Test;
@@ -34,6 +35,6 @@ public class ZipFileIteratorAndCompressorTest {
         File target = new File(baseDir + "/target/test/" + ZipFileIteratorAndCompressorTest.class.getSimpleName() + ".zip");
 
         ZipFileCompressor compressor = new ZipFileCompressor(container, new ZipOutputStream(new FileOutputStream(target)), file);
-        compressor.compress();
+        compressor.compress(new SilentLog());
     }
 }

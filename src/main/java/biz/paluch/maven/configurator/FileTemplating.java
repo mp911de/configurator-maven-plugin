@@ -25,6 +25,7 @@ package biz.paluch.maven.configurator;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,34 +35,42 @@ import java.util.regex.Pattern;
 /**
  * @author <a href="mailto:mpaluch@paluch.biz">Mark Paluch</a>
  */
-public class FileTemplating {
+public class FileTemplating
+{
 
     public static Pattern FILE_TEMPLATE_PATTERN = Pattern.compile(".*(\\.template)\\..*");
 
     /**
-     * Process files which match the template pattern. Creates a new file using the input file with property replacement.
-     * Target filename is without the template name part.
+     * Process files which match the template pattern. Creates a new file using the input file with property
+     * replacement. Target filename is without the template name part.
      *
+     * @param log
      * @param root
      * @param processor
      * @throws IOException
      */
-    public static void processFiles(File root, TemplateProcessor processor) throws IOException {
+    public static void processFiles(Log log, File root, TemplateProcessor processor) throws IOException
+    {
 
-        Iterator<File> iterator = FileUtils.iterateFiles(root, new RegexFileFilter(FILE_TEMPLATE_PATTERN), TrueFileFilter.TRUE);
+        Iterator<File> iterator =
+                FileUtils.iterateFiles(root, new RegexFileFilter(FILE_TEMPLATE_PATTERN), TrueFileFilter.TRUE);
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             File next = iterator.next();
-
-            try {
+            log.debug("Processing file " + next);
+            try
+            {
                 processor.processFile(next, getTargetFile(next));
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 throw new IOException("Cannot process file " + next.toString() + ": " + e.getMessage(), e);
             }
         }
     }
 
-    private static File getTargetFile(File next) {
+    private static File getTargetFile(File next)
+    {
         File parent = next.getParentFile();
 
         String filename = next.getName();
