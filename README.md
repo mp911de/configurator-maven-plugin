@@ -56,7 +56,7 @@ Maven Configuration
          <plugin>
            <groupId>de.paluch.maven.configurator</groupId>
            <artifactId>configurator-maven-plugin</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>1.0.1</version>
          </plugin>
          ...
        </plugins>
@@ -66,7 +66,7 @@ Maven Configuration
        <plugin>
          <groupId>de.paluch.maven.configurator</groupId>
          <artifactId>configurator-maven-plugin</artifactId>
-         <version>1.0-SNAPSHOT</version>
+         <version>1.0.1</version>
          <configuration>
            <groupId>junit</groupId>
            <artifactId>junit</artifactId>
